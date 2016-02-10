@@ -13,14 +13,14 @@
                 <td style="width: 50%;">
                     <audio style="width: 100%;" controls >
                         <source src="<?=base_url("musicas/Listadas/".$musica1["Arquivo"])?>" type="audio/mpeg">
-                        <source src="<?=$musica1["Arquivo"]?>" type="audio/ogg">
+                        <source src="<?=base_url("musicas/Listadas/".$musica1["Arquivo"])?>" type="audio/ogg">
                     </audio>
                 </td>  
                 
                 <td style="width: 50%;">
                     <audio style="width: 100%;" controls>
                         <source src="<?=base_url("musicas/Listadas/".$musica2["Arquivo"])?>" type="audio/mpeg">
-                        <source src="<?=$musica2["Arquivo"]?>" type="audio/ogg">
+                        <source src="<?=base_url("musicas/Listadas/".$musica2["Arquivo"])?>" type="audio/ogg">
                     </audio>
                 </td>                   
             </tr>
@@ -51,6 +51,10 @@
                     
                     <?php foreach($destaques_vitoria1 as $musica){?>
                         <p class="alert-warning" style="height: 35px;"><?=$musica?></p>
+                        <audio style="width: 100%;" controls >
+                            <source src="<?=base_url("musicas/Listadas/".$musica)?>" type="audio/mpeg">
+                            <source src="<?=base_url("musicas/Listadas/".$musica)?>" type="audio/ogg">
+                        </audio>
                     <?php } ?>
                     
                     <?php foreach($vitorias_musica1 as $musica){?>
@@ -76,6 +80,11 @@
                                 
                     <?php foreach($destaques_vitoria2 as $musica){?>
                         <p class="alert-warning" style="height: 35px;"><?=$musica?></p>
+                        <audio style="width: 100%;" controls >
+                            <source src="<?=base_url("musicas/Listadas/".$musica)?>" type="audio/mpeg">
+                            <source src="<?=base_url("musicas/Listadas/".$musica)?>" type="audio/ogg">
+                        </audio>
+                        
                     <?php } ?>
                     
                     <?php foreach($vitorias_musica2 as $musica){?>
