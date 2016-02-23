@@ -2,10 +2,7 @@
 
 	class Votacao extends CI_Controller{
         
-		public function index($order = null){
-            
-        if($order == null){$musicas =  $this->crud_model->get_desc("Pontuacao");}    
-        else{$musicas =  $this->crud_model->get($order); }    
+		public function index(){
             
         $todas_musicas  =  $this->crud_model->get_desc("Id");  
         $vertentes      =  $this->crud_model->get_vertentes();    
@@ -92,11 +89,11 @@
             
             if((count($destaques_vitoria1) > 0)&&(count($destaques_vitoria2) == 0)){
                 echo "Vitoria Automatica Musica 1";
-                $this->votar($musica1["Id"],$musica2["Id"]);
+                $this->votar($musica1["Id"],$musica2["Id"],1);
             }
             if((count($destaques_vitoria2) > 0)&&(count($destaques_vitoria1) == 0)){
                 echo "Vitoria Automatica Musica 2";
-                $this->votar($musica2["Id"],$musica1["Id"]);
+                $this->votar($musica2["Id"],$musica1["Id"],1);
             }
             if((count($destaques_vitoria1) > 0)&&(count($destaques_vitoria2) > 0)){
                 echo "Erro Votacao";
@@ -108,7 +105,6 @@
                 $content = array("atual_page"       => "votacao"
                                 ,"musica1"          => $musica1
                                 ,"musica2"          => $musica2
-                                ,"musicas"          => $musicas
                                 ,"ja_votados"       => count($todas_votos)
                                 ,"total_combates"   => $contagem
                                 ,"vertentes"        => $vertentes
@@ -130,7 +126,7 @@
             
 	   }
         
-        public function votar($Id1,$Id2){
+        public function votar($Id1,$Id2,$isAutomatico = 0){
             
             $musica_vencedora = $this->crud_model->get_where($Id1);   
             $musica_derrotada = $this->crud_model->get_where($Id2); 
@@ -147,8 +143,33 @@
             $data2["NumeroCombates"] = $contagem2;
             $this->crud_model->update($Id2,$data2);
             
+            $data = date('Y-m-d'); 
+            $hora = localtime();
+            
+            if($hora[8] < 10)
+            {
+                $horaA = "0".$hora[8];
+            }
+            else{$horaA = $hora[8];}
+            
+            if($hora[1] < 10)
+            {
+                $minuto = "0".$hora[1];
+            }
+            else{$minuto = $hora[1];}
+            
+            if($hora[0] < 10)
+            {
+                $segundo = "0".$hora[0];
+            }
+            else{$segundo = $hora[0];}
+            
+            $dataEhora = $data." ".$horaA.":".$minuto.":".$segundo;
+            
             $votadas["Musica1"] = $musica_vencedora["Arquivo"];
             $votadas["Musica2"] = $musica_derrotada["Arquivo"];
+            $votadas["Data"] = $dataEhora;
+            $votadas["IsAutomatico"] = $isAutomatico;
             
             $this->crud_model->insert($votadas);
             

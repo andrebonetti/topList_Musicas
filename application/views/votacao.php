@@ -98,33 +98,5 @@
             
         </table>
         
-        <table class="table">
-        
-            <tr>
-                <th>Ranking</th>
-                <th>Artista</th>
-                <th>Titulo</th>
-                <th>Pontuação</th>
-                <th>Combates</th>
-            </tr>
-            
-            
-            <?php 
-            $cont = 1;
-            foreach($musicas as $musica){ ?>
-            <?php if(($musica["Pontuacao"] % 2) == 0){ $class="par";}else{$class="impar";} ?>
-                <tr class="<?=$class?>">
-                    <td><?=$cont?></td>
-                    <td><?=$musica["Artista"]?></td>
-                    <td><?=$musica["Titulo"]?></td>
-                    <td><?=$musica["Pontuacao"]?></td>
-                    <td><?=$musica["NumeroCombates"]?></td>
-                </tr>
-            
-            
-            <?php $cont++; } ?>
-            
-        </table>
-        
     </div>
 </section>
